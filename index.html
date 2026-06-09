@@ -13,39 +13,56 @@
         header h1 { color: var(--primary-dark); font-size: 1.8rem; margin-bottom: 8px; }
         .instructor-tag { display: inline-block; margin-top: 10px; background-color: var(--primary-light); color: var(--primary-dark); padding: 4px 14px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        .mode-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .mode-card { background-color: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 25px; text-align: center; cursor: pointer; transition: 0.2s ease; box-shadow: var(--shadow); }
-        .mode-card:hover { transform: translateY(-3px); border-color: var(--primary); }
-        .mode-card.active { border-color: var(--primary); background-color: #f0fdfa; }
-        .mode-card h3 { font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 8px; }
-        .mode-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
-        .workspace { display: none; }
-        .workspace.active { display: block; }
+        
+        /* صفحة القائمة الرئيسية اختيار النظام */
+        #main-menu-page { display: block; }
+        .mode-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
+        .mode-card { background-color: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 35px 25px; text-align: center; cursor: pointer; transition: 0.3s ease; box-shadow: var(--shadow); }
+        .mode-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        .mode-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+        .mode-card h3 { font-size: 1.4rem; color: var(--primary-dark); margin-bottom: 12px; }
+        .mode-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* الصفحات المنفصلة */
+        .page-view { display: none; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .back-btn { background-color: var(--text); color: white; border: none; padding: 8px 18px; border-radius: 6px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; }
+        
         .category-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
         .tab-btn { background-color: var(--surface); border: 1px solid var(--border); padding: 6px 14px; border-radius: 30px; cursor: pointer; color: var(--text-muted); font-size: 0.9rem; }
         .tab-btn.active { background-color: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* الكروت والأسئلة */
         .question-card { background-color: var(--surface); border-radius: var(--radius); padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: left; }
         .question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted); border-bottom: 1px dashed var(--border); padding-bottom: 8px; direction: rtl; }
         .category-badge { background-color: #f1f5f9; color: #475569; padding: 2px 8px; border-radius: 4px; }
         .question-text { font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 18px; direction: ltr; }
+        
         .options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; direction: ltr; }
         .option-item { background-color: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; cursor: pointer; transition: 0.2s ease; display: flex; align-items: center; gap: 12px; font-size: 0.95rem; }
         .option-letter { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background-color: var(--surface); border: 1px solid var(--border); font-weight: bold; color: var(--primary-dark); flex-shrink: 0; }
+        
+        /* تلوين تفاعلي فوري عند الضغط */
         .option-item.selected { border-color: var(--primary); background-color: var(--primary-light); }
-        .option-item.correct-reveal { background-color: var(--success-light) !important; border-color: var(--success) !important; color: #065f46 !important; }
+        .option-item.correct-reveal { background-color: var(--success-light) !important; border-color: var(--success) !important; color: #065f46 !important; font-weight: 600; }
         .option-item.wrong-reveal { background-color: var(--error-light) !important; border-color: var(--error) !important; color: #991b1b !important; }
+        .option-item.disabled { cursor: not-allowed; pointer-events: none; }
+
         .btn-container { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
         .action-btn { background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
         .action-btn:disabled { background-color: var(--border); color: var(--text-muted); cursor: not-allowed; }
+        
         .exam-status-bar { background-color: var(--surface); border: 1px solid var(--border); padding: 15px; box-shadow: var(--shadow); position: sticky; top: 70px; z-index: 999; margin-bottom: 25px; border-radius: var(--radius); }
         .exam-status-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; direction: rtl; }
         .timer-display { font-size: 1.25rem; font-weight: bold; color: var(--error); background-color: var(--error-light); padding: 4px 12px; border-radius: 6px; }
+        
         .nav-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; background-color: var(--bg); padding: 8px; border-radius: 6px; max-height: 100px; overflow-y: auto; direction: ltr; }
         .nav-box { width: 28px; height: 28px; background-color: var(--surface); border: 1px solid var(--border); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
         .nav-box.answered { background-color: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
         .nav-box.current { background-color: var(--text); color: white; border-color: var(--text); }
-        .results-card { background-color: var(--surface); border-radius: var(--radius); padding: 35px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); margin-top: 20px; display: none; }
-        .results-card.active { display: block; }
+        
+        .results-card { background-color: var(--surface); border-radius: var(--radius); padding: 35px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); margin-top: 20px; }
         .score-circle { width: 130px; height: 130px; border-radius: 50%; background-color: var(--primary-light); color: var(--primary-dark); font-size: 2.2rem; font-weight: bold; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; border: 4px solid var(--primary); flex-direction: column; }
         .score-circle span { font-size: 0.8rem; color: var(--text-muted); font-weight: normal; }
         .stats-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 25px 0; }
@@ -53,6 +70,7 @@
         .stat-val { font-size: 1.35rem; font-weight: bold; display: block; }
         .stat-val.success { color: var(--success); }
         .stat-val.error { color: var(--error); }
+        
         .review-title { text-align: right; margin: 35px 0 15px 0; color: var(--primary-dark); border-right: 4px solid var(--primary); padding-right: 10px; font-size: 1.3rem; }
         .search-container { margin-bottom: 20px; }
         .search-input { width: 100%; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 0.95rem; outline: none; text-align: right; }
@@ -66,27 +84,28 @@
     <header>
         <div class="container">
             <h1>بنك الأسئلة التفاعلي لمادة التواصل (Communication)</h1>
-            <p>المعهد الفني للتمريض بشربين</p>
-            <div class="instructor-tag">تحت إشراف: د/ أمل رضا منسي</div>
         </div>
     </header>
 
     <main class="container">
-        <div class="mode-container">
-            <div class="mode-card active" id="mode-bank-btn" onclick="switchMode('bank')">
-                <span class="mode-icon">📚</span>
-                <h3>خيار البنك عادي</h3>
-                <p>استعراض كافة الأسئلة الـ 72 بشكل مفتوح مع عرض فوري للإجابات النموذجية الصحيحة ملونة بالاخضر.</p>
-            </div>
-            <div class="mode-card" id="mode-exam-btn" onclick="switchMode('exam')">
-                <span class="mode-icon">⏱️</span>
-                <h3>خيار امتحان مده نص ساعه</h3>
-                <p>اختبار محاكي للامتحان الفعلي مع عداد تنازلي 30 دقيقة، لوحة تنقل ذكية، والدرجة النهائية في النهاية.</p>
+        
+        <div id="main-menu-page">
+            <div class="mode-container">
+                <div class="mode-card" onclick="navigateToPage('bank')">
+                    <span class="mode-icon">📚</span>
+                    <h3>خيار البنك التفاعلي</h3>
+                    <p>تصفح الـ 72 سؤال غير محلولين، واضغط على الخيار لتعرف إجابتك صحيحة أم خاطئة في نفس اللحظة.</p>
+                </div>
+                <div class="mode-card" onclick="navigateToPage('exam')">
+                    <span class="mode-icon">⏱️</span>
+                    <h3>خيار امتحان (نصف ساعة)</h3>
+                    <p>اختبار محاكي مع عداد تنازلي 30 دقيقة ولوحة تنقل ذكية، وتظهر النتيجة والدرجة النهائية بالكامل في النهاية.</p>
+                </div>
             </div>
         </div>
 
-        <!-- BANK -->
-        <div id="bank-workspace" class="workspace active">
+        <div id="bank-page" class="page-view">
+            <button class="back-btn" onclick="navigateToPage('menu')">⬅️ العودة للقائمة الرئيسية</button>
             <div class="search-container">
                 <input type="text" class="search-input" id="bank-search" placeholder="🔍 ابحث عن الكلمات المفتاحية في الأسئلة أو الخيارات..." oninput="filterBankQuestions()">
             </div>
@@ -101,8 +120,8 @@
             <div id="bank-questions-container"></div>
         </div>
 
-        <!-- EXAM -->
-        <div id="exam-workspace" class="workspace">
+        <div id="exam-page" class="page-view">
+            <button class="back-btn" onclick="confirmExitExam()">⬅️ إلغاء الامتحان والعودة للرئيسية</button>
             <div class="exam-status-bar" id="exam-controls">
                 <div class="exam-status-flex">
                     <div class="timer-display">⏱️ <span id="exam-timer">30:00</span></div>
@@ -118,20 +137,21 @@
             </div>
         </div>
 
-        <!-- RESULTS -->
-        <div id="results-workspace" class="results-card">
-            <h2>🎉 نتيجة تقييم الامتحـان</h2>
-            <div class="score-circle" id="result-score">0% <span>الدرجة الكلية</span></div>
-            <h3 id="result-greeting"></h3>
-            <div class="stats-summary">
-                <div class="stat-item"><span>إجمالي الأسئلة</span><strong class="stat-val" id="stat-total">72</strong></div>
-                <div class="stat-item"><span>إجابات صحيحة</span><strong class="stat-val success" id="stat-correct">0</strong></div>
-                <div class="stat-item"><span>إجابات خاطئة</span><strong class="stat-val error" id="stat-wrong">0</strong></div>
-                <div class="stat-item"><span>لم يتم حلها</span><strong class="stat-val" style="color: var(--warning);" id="stat-unanswered">0</strong></div>
+        <div id="results-page" class="page-view">
+            <div class="results-card">
+                <h2>🎉 نتيجة تقييم الامتحـان</h2>
+                <div class="score-circle" id="result-score">0% <span>الدرجة الكلية</span></div>
+                <h3 id="result-greeting"></h3>
+                <div class="stats-summary">
+                    <div class="stat-item"><span>إجمالي الأسئلة</span><strong class="stat-val" id="stat-total">72</strong></div>
+                    <div class="stat-item"><span>إجابات صحيحة</span><strong class="stat-val success" id="stat-correct">0</strong></div>
+                    <div class="stat-item"><span>إجابات خاطئة</span><strong class="stat-val error" id="stat-wrong">0</strong></div>
+                    <div class="stat-item"><span>لم يتم حلها</span><strong class="stat-val" style="color: var(--warning);" id="stat-unanswered">0</strong></div>
+                </div>
+                <button class="action-btn" style="padding: 12px 30px;" onclick="navigateToPage('menu')">الخروج والعودة للرئيسية</button>
+                <div class="review-title">مراجعة وتصحيح تفصيلي لجميع الأسئلة:</div>
+                <div id="exam-review-container"></div>
             </div>
-            <button class="action-btn" style="padding: 12px 30px;" onclick="restartToBank()">العودة لوضع البنك العادي</button>
-            <div class="review-title">مراجعة وتصحيح تفصيلي لجميع الأسئلة:</div>
-            <div id="exam-review-container"></div>
         </div>
     </main>
 
@@ -158,7 +178,7 @@
             { id: 17, category: "Communication Barriers", question: "\"Prejudices\" in communication lead to which behavior?", options: { A: "Active listening", B: "Hearing only what one wants to listen to", C: "Increased feedback", D: "Clearer message transmission" }, correct: "B" },
             { id: 18, category: "Communication Barriers", question: "To overcome barriers, what should a sender do before communicating?", options: { A: "Wait for the receiver to speak first", B: "Ensure ideas are clear and systematized", C: "Use as much jargon as possible", D: "Ignore the objective of the message" }, correct: "B" },
             { id: 19, category: "Communication Barriers", question: "A sender should frame their message based on:", options: { A: "Their own level of ability", B: "The receiver's needs, understanding, and environment", C: "Only the organizational hierarchy", D: "The most complex language available" }, correct: "B" },
-            { id: 20, category: "Communication Barriers", question: "What is a key benefit of consulting others during communication planning?", options: { A: "It makes the process slower", B: "Involved peoples contribute to the system's success", C: "It eliminates the need for feedback", D: "It focuses only on formal communication" }, correct: "B" },
+            { id: 20, border: "Communication Barriers", question: "What is a key benefit of consulting others during communication planning?", options: { A: "It makes the process slower", B: "Involved peoples contribute to the system's success", C: "It eliminates the need for feedback", D: "It focuses only on formal communication" }, correct: "B" },
             { id: 21, category: "Communication Barriers", question: "Communication is more effective when the message is:", options: { A: "Helpful and valuable to the receiver", B: "Focused only on the sender's interests", C: "Long and over-complicated", D: "Sent without a specific objective" }, correct: "A" },
             { id: 22, category: "Communication Barriers", question: "What is the primary aim of getting feedback?", options: { A: "To end the conversation", B: "To find if the receiver properly understood the meaning of message", C: "To prove the sender is right", D: "To avoid face-to-face contact" }, correct: "B" },
             { id: 23, category: "Communication with health care team", question: "Effective healthcare communication is considered as important as:", options: { A: "Financial management", B: "Technical competence", C: "Hospital infrastructure", D: "Staffing ratios" }, correct: "B" },
@@ -213,32 +233,37 @@
             { id: 72, category: "Communication according to patient abilities", question: "Visually impaired clients should be allowed to...........:", options: { A: "Stand alone", B: "Take your arm for guidance", C: "Use mirrors", D: "Avoid touch" }, correct: "B" }
         ];
 
-        let currentMode = 'bank', bankCategory = 'all', bankSearch = '', examAnswers = {}, examIndex = 0, examTimer = null, examSecondsLeft = 30 * 60;
+        let bankCategory = 'all', bankSearch = '', bankUserAnswers = {}, examAnswers = {}, examIndex = 0, examTimer = null, examSecondsLeft = 30 * 60;
 
-        window.addEventListener('DOMContentLoaded', () => { renderBank(); });
+        window.addEventListener('DOMContentLoaded', () => { 
+            // البداية من القائمة الرئيسية دائماً
+            navigateToPage('menu');
+        });
 
-        function switchMode(mode) {
-            if (currentMode === mode) return;
-            if (currentMode === 'exam' && examTimer && Object.keys(examAnswers).length > 0) {
-                if (!confirm("هل تريد مغادرة الامتحان الحالي؟ ستفقد جميع إجاباتك غير المحفوظة.")) return;
-            }
-            document.getElementById('bank-workspace').classList.remove('active');
-            document.getElementById('exam-workspace').classList.remove('active');
-            document.getElementById('results-workspace').classList.remove('active');
-            document.getElementById('mode-bank-btn').classList.remove('active');
-            document.getElementById('mode-exam-btn').classList.remove('active');
-            clearInterval(examTimer); examTimer = null; currentMode = mode;
-            if (mode === 'bank') {
-                document.getElementById('mode-bank-btn').classList.add('active');
-                document.getElementById('bank-workspace').classList.add('active');
+        function navigateToPage(pageId) {
+            // إخفاء كافة الصفحات أولاً
+            document.getElementById('main-menu-page').style.display = 'none';
+            document.getElementById('bank-page').style.display = 'none';
+            document.getElementById('exam-page').style.display = 'none';
+            document.getElementById('results-page').style.display = 'none';
+
+            if (pageId === 'menu') {
+                document.getElementById('main-menu-page').style.display = 'block';
+                if (examTimer) { clearInterval(examTimer); examTimer = null; }
+            } else if (pageId === 'bank') {
+                document.getElementById('bank-page').style.display = 'block';
+                bankUserAnswers = {}; // تصفير الاختيارات السابقة لبدء اختبار جديد
                 renderBank();
-            } else {
-                document.getElementById('mode-exam-btn').classList.add('active');
-                document.getElementById('exam-workspace').classList.add('active');
+            } else if (pageId === 'exam') {
+                document.getElementById('exam-page').style.display = 'block';
                 startExam();
+            } else if (pageId === 'results') {
+                document.getElementById('results-page').style.display = 'block';
             }
+            window.scrollTo(0,0);
         }
 
+        // ==================== نظام البنك التفاعلي المطور ====================
         function filterBankCategory(cat, btn) {
             bankCategory = cat;
             document.querySelectorAll('#bank-tabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -255,25 +280,47 @@
                 return (bankCategory === 'all' || q.category === bankCategory) && 
                        (q.question.toLowerCase().includes(bankSearch) || Object.values(q.options).some(o => o.toLowerCase().includes(bankSearch)));
             });
+            
             if (filtered.length === 0) {
                 container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted);">لا توجد أسئلة تطابق البحث الحالي.</div>`; return;
             }
+            
             filtered.forEach(q => {
                 const card = document.createElement('div'); card.className = 'question-card';
                 let optionsHtml = '';
+                const answeredLetter = bankUserAnswers[q.id]; 
+
                 Object.keys(q.options).forEach(l => {
-                    optionsHtml += `<div class="option-item ${l === q.correct ? 'correct-reveal' : ''}"><span class="option-letter">${l}</span><span>${q.options[l]}</span></div>`;
+                    let classes = '';
+                    // إذا كان الطالب جاوب على هذا السؤال، نقوم بالتحقق وتلوينه
+                    if (answeredLetter) {
+                        classes += ' disabled '; // قفل السؤال من الضغط مرة تانية
+                        if (l === q.correct) {
+                            classes += ' correct-reveal '; // الإجابة الصح بالأخضر دائماً
+                        } else if (answeredLetter === l) {
+                            classes += ' wrong-reveal '; // لو اختار دي وطلعت غلط تلون بالأحمر
+                        }
+                    }
+                    optionsHtml += `<div class="option-item ${classes}" onclick="handleBankSelect('${q.id}', '${l}')"><span class="option-letter">${l}</span><span>${q.options[l]}</span></div>`;
                 });
+                
                 card.innerHTML = `<div class="question-meta"><span><strong>السؤال رقم ${q.id}</strong></span><span class="category-badge">${q.category}</span></div><div class="question-text">${q.id}. ${q.question}</div><div class="options-list">${optionsHtml}</div>`;
                 container.appendChild(card);
             });
         }
 
+        function handleBankSelect(qId, letter) {
+            if (bankUserAnswers[qId]) return; // لمنع الاختيار المتعدد لنفس السؤال
+            bankUserAnswers[qId] = letter;
+            renderBank(); // إعادة البناء لتطبيق الألوان فوراً
+        }
+
+        // ==================== نظام الامتحان المحاكي ====================
         function startExam() {
             examAnswers = {}; examIndex = 0; examSecondsLeft = 30 * 60; buildExamNav(); showExamQuestion();
             if (examTimer) clearInterval(examTimer);
             examTimer = setInterval(() => {
-                if (examSecondsLeft <= 0) { clearInterval(examTimer); alert("انتهى وقت الامتحان!"); endExam(); }
+                if (examSecondsLeft <= 0) { clearInterval(examTimer); alert("انتهى وقت الامتحان الكلي!"); endExam(); }
                 else {
                     examSecondsLeft--;
                     document.getElementById('exam-timer').textContent = `${Math.floor(examSecondsLeft / 60).toString().padStart(2, '0')}:${(examSecondsLeft % 60).toString().padStart(2, '0')}`;
@@ -305,15 +352,18 @@
 
         function selectExamOption(qId, letter) { examAnswers[qId] = letter; document.getElementById(`nav-box-${examIndex}`).classList.add('answered'); showExamQuestion(); }
         function navigateExam(dir) { examIndex += dir; showExamQuestion(); }
-        function confirmEndExam() { if (confirm("هل أنت متأكد من تسليم الإجابات وإنهاء الامتحان؟")) endExam(); }
+        function confirmExitExam() { if (confirm("هل تريد إلغاء الامتحان؟ ستفقد جميع تقدمك الحالي.")) navigateToPage('menu'); }
+        function confirmEndExam() { if (confirm("هل أنت متأكد من تسليم كل الإجابات وإنهاء الاختبار الآن؟")) endExam(); }
 
         function endExam() {
-            clearInterval(examTimer); document.getElementById('exam-workspace').classList.remove('active'); document.getElementById('results-workspace').classList.add('active');
+            clearInterval(examTimer); 
             let correct = 0, wrong = 0, unanswered = 0;
             const revContainer = document.getElementById('exam-review-container'); revContainer.innerHTML = '';
+            
             questions.forEach(q => {
                 const userAns = examAnswers[q.id]; const isCorrect = (userAns === q.correct);
                 if (!userAns) unanswered++; else if (isCorrect) correct++; else wrong++;
+                
                 const card = document.createElement('div'); card.className = 'question-card';
                 card.style.borderRight = isCorrect ? '5px solid var(--success)' : (!userAns ? '5px solid var(--warning)' : '5px solid var(--error)');
                 let optionsHtml = '';
@@ -324,13 +374,14 @@
                 card.innerHTML = `<div class="question-meta"><span><strong>السؤال رقم ${q.id} — ${isCorrect?'✅ صحيحة':(!userAns?'⚠️ لم تُحل':'❌ خاطئة')}</strong></span><span class="category-badge">${q.category}</span></div><div class="question-text">${q.id}. ${q.question}</div><div class="options-list">${optionsHtml}</div>`;
                 revContainer.appendChild(card);
             });
+            
             const percent = Math.round((correct / questions.length) * 100);
             document.getElementById('result-score').innerHTML = `${percent}% <span>الدرجة الكلية</span>`;
             document.getElementById('stat-correct').textContent = correct; document.getElementById('stat-wrong').textContent = wrong; document.getElementById('stat-unanswered').textContent = unanswered;
             document.getElementById('result-greeting').textContent = percent >= 85 ? "🏆 أداء ممتاز ومشرف جداً!" : (percent >= 60 ? "👍 ناجح، أداء جيد ويمكنك تحسينه." : "📚 تحتاج لمراجعة الأسئلة وإعادة المحاولة.");
-            window.scrollTo({ top: document.getElementById('results-workspace').offsetTop - 20, behavior: 'smooth' });
+            
+            navigateToPage('results');
         }
-        function restartToBank() { switchMode('bank'); }
     </script>
 </body>
-                                                               </html>
+    </html>
