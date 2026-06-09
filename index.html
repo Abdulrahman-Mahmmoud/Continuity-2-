@@ -3,513 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بنك أسئلة التمريض التفاعلي - مادة التواصل</title>
+    <title>بنك أسئلة التواصل التفاعلي</title>
     <style>
-        :root {
-            --primary: #0d9488;
-            --primary-dark: #0f766e;
-            --primary-light: #ccfbf1;
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --text: #1e293b;
-            --text-muted: #64748b;
-            --success: #10b981;
-            --success-light: #d1fae5;
-            --error: #ef4444;
-            --error-light: #fee2e2;
-            --warning: #f59e0b;
-            --warning-light: #fef3c7;
-            --border: #e2e8f0;
-            --radius: 12px;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-            --transition: all 0.2s ease-in-out;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            padding-bottom: 60px;
-        }
-
-        /* Blessing Banner REQUIRED BY USER */
-        .blessing-banner {
-            background: linear-gradient(135deg, #115e59, #0d9488);
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .blessing-banner span {
-            display: inline-block;
-            animation: pulse 2s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.9; }
-            100% { transform: scale(1.03); opacity: 1; }
-        }
-
-        header {
-            background-color: var(--surface);
-            padding: 25px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-        }
-
-        header h1 {
-            color: var(--primary-dark);
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-        
-        .instructor-tag {
-            display: inline-block;
-            margin-top: 10px;
-            background-color: var(--primary-light);
-            color: var(--primary-dark);
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Mode Selection Panel */
-        .mode-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .mode-card {
-            background-color: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            padding: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-        }
-
-        .mode-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary);
-        }
-
-        .mode-card.active {
-            border-color: var(--primary);
-            background-color: #f0fdfa;
-            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
-        }
-
-        .mode-card h3 {
-            font-size: 1.25rem;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-        }
-
-        .mode-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .mode-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        /* Workspaces */
-        .workspace {
-            display: none;
-        }
-
-        .workspace.active {
-            display: block;
-        }
-
-        /* Categories tabs styling */
-        .category-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 15px;
-        }
-
-        .tab-btn {
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            padding: 6px 14px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: var(--transition);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .tab-btn:hover, .tab-btn.active {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Question Card Styling */
-        .question-card {
-            background-color: var(--surface);
-            border-radius: var(--radius);
-            padding: 22px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: var(--transition);
-        }
-        
-        .question-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-bottom: 1px dashed var(--border);
-            padding-bottom: 8px;
-        }
-
-        .category-badge {
-            background-color: #f1f5f9;
-            color: #475569;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .question-text {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 18px;
-            direction: ltr;
-            text-align: left;
-        }
-
-        .options-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .option-item {
-            background-color: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            direction: ltr;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        .option-item:hover {
-            background-color: #f1f5f9;
-        }
-
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            font-weight: bold;
-            color: var(--primary-dark);
-            flex-shrink: 0;
-        }
-
-        .option-item.selected {
-            border-color: var(--primary);
-            background-color: var(--primary-light);
-        }
-        
-        .option-item.selected .option-letter {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Feedback States */
-        .option-item.correct-reveal {
-            background-color: var(--success-light) !important;
-            border-color: var(--success) !important;
-            color: #065f46 !important;
-        }
-        
-        .option-item.correct-reveal .option-letter {
-            background-color: var(--success) !important;
-            color: white !important;
-            border-color: var(--success) !important;
-        }
-
-        .option-item.wrong-reveal {
-            background-color: var(--error-light) !important;
-            border-color: var(--error) !important;
-            color: #991b1b !important;
-        }
-        
-        .option-item.wrong-reveal .option-letter {
-            background-color: var(--error) !important;
-            color: white !important;
-            border-color: var(--error) !important;
-        }
-
-        /* Buttons Control */
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .action-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-
-        .action-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .action-btn:disabled {
-            background-color: var(--border);
-            color: var(--text-muted);
-            cursor: not-allowed;
-        }
-
-        /* Sticky Control Bar for Exam Mode */
-        .exam-status-bar {
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            padding: 15px;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 70px;
-            z-index: 999;
-            margin-bottom: 25px;
-            border-radius: var(--radius);
-        }
-        
-        .exam-status-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .timer-display {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: var(--error);
-            background-color: var(--error-light);
-            padding: 4px 12px;
-            border-radius: 6px;
-        }
-
-        .nav-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 12px;
-            background-color: var(--bg);
-            padding: 8px;
-            border-radius: 6px;
-            max-height: 100px;
-            overflow-y: auto;
-        }
-
-        .nav-box {
-            width: 28px;
-            height: 28px;
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .nav-box.answered {
-            background-color: var(--primary-light);
-            border-color: var(--primary);
-            color: var(--primary-dark);
-        }
-
-        .nav-box.current {
-            background-color: var(--text);
-            color: white;
-            border-color: var(--text);
-        }
-
-        /* Results Display Card */
-        .results-card {
-            background-color: var(--surface);
-            border-radius: var(--radius);
-            padding: 35px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            border: 1px solid var(--border);
-            margin-top: 20px;
-            display: none;
-        }
-
-        .results-card.active {
-            display: block;
-        }
-
-        .score-circle {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background-color: var(--primary-light);
-            color: var(--primary-dark);
-            font-size: 2.2rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px auto;
-            border: 4px solid var(--primary);
-            flex-direction: column;
-        }
-
-        .score-circle span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: normal;
-        }
-
-        .stats-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-            margin: 25px 0;
-        }
-
-        .stat-item {
-            background-color: var(--bg);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .stat-val {
-            font-size: 1.35rem;
-            font-weight: bold;
-            display: block;
-        }
-        
+        :root { --primary: #0d9488; --primary-dark: #0f766e; --primary-light: #ccfbf1; --bg: #f8fafc; --surface: #ffffff; --text: #1e293b; --text-muted: #64748b; --success: #10b981; --success-light: #d1fae5; --error: #ef4444; --error-light: #fee2e2; --warning: #f59e0b; --border: #e2e8f0; --radius: 12px; --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 60px; }
+        .blessing-banner { background: linear-gradient(135deg, #115e59, #0d9488); color: white; text-align: center; padding: 15px; font-size: 1.5rem; font-weight: bold; position: sticky; top: 0; z-index: 1000; }
+        header { background-color: var(--surface); padding: 25px 20px; text-align: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; box-shadow: var(--shadow); }
+        header h1 { color: var(--primary-dark); font-size: 1.8rem; margin-bottom: 8px; }
+        .instructor-tag { display: inline-block; margin-top: 10px; background-color: var(--primary-light); color: var(--primary-dark); padding: 4px 14px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .mode-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .mode-card { background-color: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 25px; text-align: center; cursor: pointer; transition: 0.2s ease; box-shadow: var(--shadow); }
+        .mode-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+        .mode-card.active { border-color: var(--primary); background-color: #f0fdfa; }
+        .mode-card h3 { font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 8px; }
+        .mode-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+        .workspace { display: none; }
+        .workspace.active { display: block; }
+        .category-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        .tab-btn { background-color: var(--surface); border: 1px solid var(--border); padding: 6px 14px; border-radius: 30px; cursor: pointer; color: var(--text-muted); font-size: 0.9rem; }
+        .tab-btn.active { background-color: var(--primary); color: white; border-color: var(--primary); }
+        .question-card { background-color: var(--surface); border-radius: var(--radius); padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); text-align: left; }
+        .question-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted); border-bottom: 1px dashed var(--border); padding-bottom: 8px; direction: rtl; }
+        .category-badge { background-color: #f1f5f9; color: #475569; padding: 2px 8px; border-radius: 4px; }
+        .question-text { font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 18px; direction: ltr; }
+        .options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; direction: ltr; }
+        .option-item { background-color: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; cursor: pointer; transition: 0.2s ease; display: flex; align-items: center; gap: 12px; font-size: 0.95rem; }
+        .option-letter { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background-color: var(--surface); border: 1px solid var(--border); font-weight: bold; color: var(--primary-dark); flex-shrink: 0; }
+        .option-item.selected { border-color: var(--primary); background-color: var(--primary-light); }
+        .option-item.correct-reveal { background-color: var(--success-light) !important; border-color: var(--success) !important; color: #065f46 !important; }
+        .option-item.wrong-reveal { background-color: var(--error-light) !important; border-color: var(--error) !important; color: #991b1b !important; }
+        .btn-container { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .action-btn { background-color: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
+        .action-btn:disabled { background-color: var(--border); color: var(--text-muted); cursor: not-allowed; }
+        .exam-status-bar { background-color: var(--surface); border: 1px solid var(--border); padding: 15px; box-shadow: var(--shadow); position: sticky; top: 70px; z-index: 999; margin-bottom: 25px; border-radius: var(--radius); }
+        .exam-status-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; direction: rtl; }
+        .timer-display { font-size: 1.25rem; font-weight: bold; color: var(--error); background-color: var(--error-light); padding: 4px 12px; border-radius: 6px; }
+        .nav-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; background-color: var(--bg); padding: 8px; border-radius: 6px; max-height: 100px; overflow-y: auto; direction: ltr; }
+        .nav-box { width: 28px; height: 28px; background-color: var(--surface); border: 1px solid var(--border); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+        .nav-box.answered { background-color: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
+        .nav-box.current { background-color: var(--text); color: white; border-color: var(--text); }
+        .results-card { background-color: var(--surface); border-radius: var(--radius); padding: 35px; box-shadow: var(--shadow); text-align: center; border: 1px solid var(--border); margin-top: 20px; display: none; }
+        .results-card.active { display: block; }
+        .score-circle { width: 130px; height: 130px; border-radius: 50%; background-color: var(--primary-light); color: var(--primary-dark); font-size: 2.2rem; font-weight: bold; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; border: 4px solid var(--primary); flex-direction: column; }
+        .score-circle span { font-size: 0.8rem; color: var(--text-muted); font-weight: normal; }
+        .stats-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 25px 0; }
+        .stat-item { background-color: var(--bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border); }
+        .stat-val { font-size: 1.35rem; font-weight: bold; display: block; }
         .stat-val.success { color: var(--success); }
         .stat-val.error { color: var(--error); }
-
-        .review-title {
-            text-align: right;
-            margin: 35px 0 15px 0;
-            color: var(--primary-dark);
-            border-right: 4px solid var(--primary);
-            padding-right: 10px;
-            font-size: 1.3rem;
-        }
-
-        .search-container {
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 10px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: var(--primary);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 40px;
-            background-color: var(--surface);
-        }
+        .review-title { text-align: right; margin: 35px 0 15px 0; color: var(--primary-dark); border-right: 4px solid var(--primary); padding-right: 10px; font-size: 1.3rem; }
+        .search-container { margin-bottom: 20px; }
+        .search-input { width: 100%; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); font-size: 0.95rem; outline: none; text-align: right; }
+        footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 40px; background-color: var(--surface); }
     </style>
 </head>
 <body>
 
-    <div class="blessing-banner">
-        <span>صلّوا على النَّبِيِّ مُحَمَّدٍ ﷺ</span>
-    </div>
+    <div class="blessing-banner"><span>صلّوا على النَّبِيِّ مُحَمَّدٍ ﷺ</span></div>
 
     <header>
         <div class="container">
             <h1>بنك الأسئلة التفاعلي لمادة التواصل (Communication)</h1>
-            <p>مطابق للورقة الامتحانية تماماً بدون أي تعديل وبشكل تفاعلي ذكي</p>
+            <p>المعهد الفني للتمريض بشربين</p>
+            <div class="instructor-tag">تحت إشراف: د/ أمل رضا منسي</div>
         </div>
     </header>
 
     <main class="container">
-        <!-- Mode Toggles -->
         <div class="mode-container">
             <div class="mode-card active" id="mode-bank-btn" onclick="switchMode('bank')">
                 <span class="mode-icon">📚</span>
@@ -523,12 +85,11 @@
             </div>
         </div>
 
-        <!-- ================= WORKSPACE: BANK MODE ================= -->
+        <!-- BANK -->
         <div id="bank-workspace" class="workspace active">
             <div class="search-container">
                 <input type="text" class="search-input" id="bank-search" placeholder="🔍 ابحث عن الكلمات المفتاحية في الأسئلة أو الخيارات..." oninput="filterBankQuestions()">
             </div>
-
             <div class="category-tabs" id="bank-tabs">
                 <button class="tab-btn active" onclick="filterBankCategory('all', this)">الكل (72)</button>
                 <button class="tab-btn" onclick="filterBankCategory('Communication process', this)">Communication process</button>
@@ -537,847 +98,239 @@
                 <button class="tab-btn" onclick="filterBankCategory('Interview', this)">Interview</button>
                 <button class="tab-btn" onclick="filterBankCategory('Communication according to patient abilities', this)">Patient Abilities</button>
             </div>
-
             <div id="bank-questions-container"></div>
         </div>
 
-        <!-- ================= WORKSPACE: EXAM MODE ================= -->
+        <!-- EXAM -->
         <div id="exam-workspace" class="workspace">
             <div class="exam-status-bar" id="exam-controls">
                 <div class="exam-status-flex">
-                    <div class="timer-display">
-                        ⏱️ <span id="exam-timer">30:00</span>
-                    </div>
-                    <div>
-                        <strong>التقدم:</strong> <span id="exam-progress-text">السؤال 1 من 72</span>
-                    </div>
-                    <button class="action-btn" style="background-color: var(--error);" onclick="confirmEndExam()">إنهاء الامتحان وعرض الدرجة</button>
+                    <div class="timer-display">⏱️ <span id="exam-timer">30:00</span></div>
+                    <div><strong>التقدم:</strong> <span id="exam-progress-text">السؤال 1 من 72</span></div>
+                    <button class="action-btn" style="background-color: var(--error);" onclick="confirmEndExam()">إنهاء الامتحان</button>
                 </div>
                 <div class="nav-grid" id="exam-nav-grid"></div>
             </div>
-
             <div id="exam-question-viewport"></div>
-
             <div class="btn-container">
                 <button class="action-btn" id="exam-prev-btn" onclick="navigateExam(-1)">السؤال السابق</button>
                 <button class="action-btn" id="exam-next-btn" onclick="navigateExam(1)">السؤال التالي</button>
             </div>
         </div>
 
-        <!-- ================= WORKSPACE: RESULTS ================= -->
+        <!-- RESULTS -->
         <div id="results-workspace" class="results-card">
             <h2>🎉 نتيجة تقييم الامتحـان</h2>
-            <p style="margin-bottom: 20px; color: var(--text-muted);">تم حساب الدرجة الإجمالية بناءً على معايير التصحيح الفوري</p>
-            
-            <div class="score-circle" id="result-score">
-                0%
-                <span>الدرجة النهائية</span>
-            </div>
-
-            <h3 id="result-greeting">عمل ممتاز!</h3>
-
+            <div class="score-circle" id="result-score">0% <span>الدرجة الكلية</span></div>
+            <h3 id="result-greeting"></h3>
             <div class="stats-summary">
-                <div class="stat-item">
-                    <span>إجمالي الأسئلة</span>
-                    <strong class="stat-val" id="stat-total">72</strong>
-                </div>
-                <div class="stat-item">
-                    <span>إجابات صحيحة</span>
-                    <strong class="stat-val success" id="stat-correct">0</strong>
-                </div>
-                <div class="stat-item">
-                    <span>إجابات خاطئة</span>
-                    <strong class="stat-val error" id="stat-wrong">0</strong>
-                </div>
-                <div class="stat-item">
-                    <span>لم يتم حلها</span>
-                    <strong class="stat-val" style="color: var(--warning);" id="stat-unanswered">0</strong>
-                </div>
+                <div class="stat-item"><span>إجمالي الأسئلة</span><strong class="stat-val" id="stat-total">72</strong></div>
+                <div class="stat-item"><span>إجابات صحيحة</span><strong class="stat-val success" id="stat-correct">0</strong></div>
+                <div class="stat-item"><span>إجابات خاطئة</span><strong class="stat-val error" id="stat-wrong">0</strong></div>
+                <div class="stat-item"><span>لم يتم حلها</span><strong class="stat-val" style="color: var(--warning);" id="stat-unanswered">0</strong></div>
             </div>
-
             <button class="action-btn" style="padding: 12px 30px;" onclick="restartToBank()">العودة لوضع البنك العادي</button>
-
             <div class="review-title">مراجعة وتصحيح تفصيلي لجميع الأسئلة:</div>
             <div id="exam-review-container"></div>
         </div>
     </main>
 
+    <footer><p>المعهد الفني للتمريض بشربين • جميع الحقوق محفوظة للطلاب © 2026</p></footer>
+
     <script>
-        // 72 Questions compiled and double-checked flawlessly from all pages
         const questions = [
-            {
-                id: 1,
-                category: "Communication process",
-                question: "What is the primary purpose of communication in health education and promotion?",
-                options: { A: "To share administrative data", B: "To promote health improvements through behavior modification", C: "To advertise new medical equipment", D: "To record patient history" },
-                correct: "B"
-            },
-            {
-                id: 2,
-                category: "Communication process",
-                question: "Which stage of communication is characterized by ensuring the message is seen or heard by the target group?",
-                options: { A: "Stage 1: Reaching the intended audience", B: "Stage 2: Attracting attention", C: "Stage 3: Understanding the message", D: "Stage 4: Promoting change" },
-                correct: "A"
-            },
-            {
-                id: 3,
-                category: "Communication process",
-                question: "Which of the following is a physical characteristic used to attract attention?",
-                options: { A: "Novelty", B: "Intensity, such as bold lettering", C: "Humor", D: "Felt needs of the audience" },
-                correct: "B"
-            },
-            {
-                id: 4,
-                category: "Communication process",
-                question: "A communication that uses unusual features or surprising objects to attract attention is using:",
-                options: { A: "Entertainment", B: "Novelty", C: "Intensity", D: "Physical size" },
-                correct: "B"
-            },
-            {
-                id: 5,
-                category: "Communication process",
-                question: "Misunderstandings in communication most easily occur when:",
-                options: { A: "Primary colors are used", B: "The audience is motivated", C: "Complex language or technical jargon is used", D: "The sender is a health extension worker" },
-                correct: "C"
-            },
-            {
-                id: 6,
-                category: "Communication process",
-                question: "Which communication approach involves explaining a new idea, including its strengths and weaknesses?",
-                options: { A: "Informing", B: "Educating", C: "Persuading", D: "Entertaining" },
-                correct: "B"
-            },
-            {
-                id: 7,
-                category: "Communication process",
-                question: "Communication that takes place inside a person, including their thoughts and justifications, is:",
-                options: { A: "Interpersonal communication", B: "Mass communication", C: "Intra-personal communication", D: "Public communication" },
-                correct: "C"
-            },
-            {
-                id: 8,
-                category: "Communication process",
-                question: "Interpersonal communication is defined as interaction between two or more people who:",
-                options: { A: "Live in the same city", B: "Are together at the same time and place", C: "Read the same newspaper", D: "Have the same job" },
-                correct: "B"
-            },
-            {
-                id: 9,
-                category: "Communication Barriers",
-                question: "What is defined as the passing of information from sender to receiver with minimum interference?",
-                options: { A: "Organizational structure", B: "Effective communication", C: "Feedback loop", D: "Semantic decoding" },
-                correct: "B"
-            },
-            {
-                id: 10,
-                category: "Communication Barriers",
-                question: "Which of the following is a primary result of communication barriers in the workplace?",
-                options: { A: "Increased employee satisfaction", B: "Message manipulation and conflict", C: "Improved feedback loops", D: "Clearer organizational goals" },
-                correct: "B"
-            },
-            {
-                id: 11,
-                category: "Communication Barriers",
-                question: "Using unfamiliar or over-complicated technical terms describes which barrier?",
-                options: { A: "Physical barrier", B: "Jargon", C: "Psychological barrier", D: "Cultural difference" },
-                correct: "B"
-            },
-            {
-                id: 12,
-                category: "Communication Barriers",
-                question: "If a receiver is distracted by others speaking at the same time, this is a barrier of:",
-                options: { A: "Lack of attention or interest", B: "Perception difference", C: "Physiological disability", D: "Semantic noise" },
-                correct: "A"
-            },
-            {
-                id: 13,
-                category: "Communication Barriers",
-                question: "Which barrier occurs when two people see things differently and their viewpoints hinder message deciphering?",
-                options: { A: "Physical barrier", B: "Perception difference", C: "Language difference", D: "Emotional barrier" },
-                correct: "B"
-            },
-            {
-                id: 14,
-                category: "Communication Barriers",
-                question: "A receiver with hearing problems or a speaker with speech disabilities is experiencing:",
-                options: { A: "Cultural differences", B: "Physical disabilities", C: "Prejudices", D: "Semantic barriers" },
-                correct: "B"
-            },
-            {
-                id: 15,
-                category: "Communication Barriers",
-                question: "Taboo topics like politics, religion, or racism often create:",
-                options: { A: "Organizational barriers", B: "Physical barriers", C: "Emotional barriers", D: "Systemic barriers" },
-                correct: "C"
-            },
-            {
-                id: 16,
-                category: "Communication Barriers",
-                question: "Social interactions having different norms regarding personal space is an example of:",
-                options: { A: "Physiological barriers", B: "Difference in culture", C: "Semantic barriers", D: "Organizational failure" },
-                correct: "B"
-            },
-            {
-                id: 17,
-                category: "Communication Barriers",
-                question: '"Prejudices" in communication lead to which behavior?',
-                options: { A: "Active listening", B: "Hearing only what one wants to listen to", C: "Increased feedback", D: "Clearer message transmission" },
-                correct: "B"
-            },
-            {
-                id: 18,
-                category: "Communication Barriers",
-                question: "To overcome barriers, what should a sender do before communicating?",
-                options: { A: "Wait for the receiver to speak first", B: "Ensure ideas are clear and systematized", C: "Use as much jargon as possible", D: "Ignore the objective of the message" },
-                correct: "B"
-            },
-            {
-                id: 19,
-                category: "Communication Barriers",
-                question: "A sender should frame their message based on:",
-                options: { A: "Their own level of ability", B: "The receiver's needs, understanding, and environment", C: "Only the organizational hierarchy", D: "The most complex language available" },
-                correct: "B"
-            },
-            {
-                id: 20,
-                category: "Communication Barriers",
-                question: "What is a key benefit of consulting others during communication planning?",
-                options: { A: "It makes the process slower", B: "Involved peoples contribute to the system's success", C: "It eliminates the need for feedback", D: "It focuses only on formal communication" },
-                correct: "B"
-            },
-            {
-                id: 21,
-                category: "Communication Barriers",
-                question: "Communication is more effective when the message is:",
-                options: { A: "Helpful and valuable to the receiver", B: "Focused only on the sender's interests", C: "Long and over-complicated", D: "Sent without a specific objective" },
-                correct: "A"
-            },
-            {
-                id: 22,
-                category: "Communication Barriers",
-                question: "What is the primary aim of getting feedback?",
-                options: { A: "To end the conversation", B: "To find if the receiver properly understood the meaning of message", C: "To prove the sender is right", D: "To avoid face-to-face contact" },
-                correct: "B"
-            },
-            {
-                id: 23,
-                category: "Communication with health care team",
-                question: "Effective communication in healthcare is considered as important as:",
-                options: { A: "Financial management", B: "Technical competence", C: "Hospital infrastructure", D: "Staffing ratios" },
-                correct: "B"
-            },
-            {
-                id: 24,
-                category: "Communication with health care team",
-                question: "Which is the most important tool for health professionals to gather pertinent information and elicit cooperation?",
-                options: { A: "Electronic health records", B: "Diagnostic equipment", C: "Communication", D: "Standard operating procedures" },
-                correct: "C"
-            },
-            {
-                id: 25,
-                category: "Communication with health care team",
-                question: "The exchange of complex or technical terms among healthcare professionals is defined as:",
-                options: { A: "Clinical practice", B: "Healthcare team communication", C: "Conflict management", D: "Professional networking" },
-                correct: "B"
-            },
-            {
-                id: 26,
-                category: "Communication with health care team",
-                question: "What is a primary benefit of good communication regarding patient safety?",
-                options: { A: "It increases hospital revenue", B: "It reduces medical errors", C: "It shortens nursing shifts", D: "It replaces the need for documentation" },
-                correct: "B"
-            },
-            {
-                id: 27,
-                category: "Communication with health care team",
-                question: "Which of the following is a benefit of communication for the healthcare staff?",
-                options: { A: "Increased workload", B: "Higher rates of burnout", C: "Increased job satisfaction", D: "Less accountability" },
-                correct: "C"
-            },
-            {
-                id: 28,
-                category: "Communication with health care team",
-                question: "Which part of the communication model describes the way through which the message is conveyed?",
-                options: { A: "Receiver", B: "Channel", C: "Feedback", D: "Decoding" },
-                correct: "B"
-            },
-            {
-                id: 29,
-                category: "Communication with health care team",
-                question: "Formal healthcare messages include:",
-                options: { A: "Face-to-face greetings", B: "Emails to friends", C: "Hospital discharge summaries", D: "Informal phone chats" },
-                correct: "C"
-            },
-            {
-                id: 30,
-                category: "Communication with health care team",
-                question: "A major concern requiring strong security protocols in healthcare communication is:",
-                options: { A: "Staff scheduling", B: "Patient privacy", C: "Financial transactions", D: "Equipment maintenance" },
-                correct: "B"
-            },
-            {
-                id: 31,
-                category: "Communication with health care team",
-                question: "Effective healthcare teams prioritize which type of communication to reduce errors?",
-                options: { A: "Indirect communication", B: "Face-to-face communication", C: "Informal rumors", D: "One-way memos" },
-                correct: "B"
-            },
-            {
-                id: 32,
-                category: "Communication with health care team",
-                question: "Which of the following is a key element of an effective handover?",
-                options: { A: "Making it as fast as possible", B: "Avoiding eye contact to stay focused", C: "Adequate time without interruptions", D: "Using highly complex jargon" },
-                correct: "C"
-            },
-            {
-                id: 33,
-                category: "Communication with health care team",
-                question: "Handover of a specific patient should include a summary of stay, including:",
-                options: { A: "The patient's home address", B: "Diagnosis and treatment", C: "The hospital's financial policy", D: "The nurse's personal opinions on the family" },
-                correct: "B"
-            },
-            {
-                id: 34,
-                category: "Communication with health care team",
-                question: "Poor communication during handover is specifically associated with:",
-                options: { A: "Increased hospital parking fees", B: "Increased patient mortality and morbidity", C: "Improved staff attendance", D: "Better equipment maintenance" },
-                correct: "B"
-            },
-            {
-                id: 35,
-                category: "Communication with health care team",
-                question: "A communication plan for ongoing treatment during handover should include:",
-                options: { A: "Only the patient's diet", B: "Drugs and therapies", C: "The staff's vacation schedule", D: "Previous hospital history from 10 years ago" },
-                correct: "B"
-            },
-            {
-                id: 36,
-                category: "Communication with health care team",
-                question: "Which of the following is a way to improve communication in a healthcare organization?",
-                options: { A: "Discouraging mobile collaboration", B: "Making communication part of the organization's culture", C: "Relying solely on paper notes", D: "Reducing face-to-face interactions" },
-                correct: "B"
-            },
-            {
-                id: 37,
-                category: "Communication with health care team",
-                question: "Streamlining communication channels helps to:",
-                options: { A: "Create more confusion", B: "Improve communication in healthcare", C: "Increase the number of meetings", D: "Ensure only doctors can speak" },
-                correct: "B"
-            },
-            {
-                id: 38,
-                category: "Communication with health care team",
-                question: "Non-verbal communication includes:",
-                options: { A: "Written reports", B: "Facial expressions, eye contact, and posture", C: "Phone conversations", D: "Text messages" },
-                correct: "B"
-            },
-            {
-                id: 39,
-                category: "Interview",
-                question: "A nursing interview is defined as:",
-                options: { A: "A casual conversation to pass the time", B: "An organized conversation to obtain client history", C: "A physical examination of the patient's body", D: "A social interaction between the nurse and the family" },
-                correct: "B"
-            },
-            {
-                id: 40,
-                category: "Interview",
-                question: "The primary objective of an interview is to collect:",
-                options: { A: "Objective data through physical touch", B: "Subjective data to supplement objective assessments", C: "Financial information for hospital billing", D: "Only the patient's legal documents" },
-                correct: "B"
-            },
-            {
-                id: 41,
-                category: "Interview",
-                question: "Which of the following is an objective of the nursing interview?",
-                options: { A: "To prescribe medications", B: "To establish trust and rapport with the patient", C: "To replace the need for physical assessment", D: "To diagnose the patient without a physician" },
-                correct: "B"
-            },
-            {
-                id: 42,
-                category: "Interview",
-                question: "Which type of question is best for gathering detailed responses and encouraging the patient to tell their story?",
-                options: { A: "Closed-ended", B: "Open-ended", C: "Leading questions", D: "Focused questions" },
-                correct: "B"
-            },
-            {
-                id: 43,
-                category: "Interview",
-                question: "Closed-ended questions are most useful when the nurse needs:",
-                options: { A: "Detailed emotional context", B: 'Specific facts or "yes/no" answers', C: "To build long-term rapport", D: "To understand the patient's perspective" },
-                correct: "B"
-            },
-            {
-                id: 44,
-                category: "Interview",
-                question: "Which phase of the interview involves explains the purpose of interview and build a rapport with the patient?",
-                options: { A: "Working phase", B: "Orientation phase", C: "Termination phase", D: "Follow-up phase" },
-                correct: "B"
-            },
-            {
-                id: 45,
-                category: "Interview",
-                question: "In which phase the nurse obtain data for developing a nursing care plan of the patient?",
-                options: { A: "Termination phase", B: "Working phase", C: "Orientation phase", D: "Preparatory phase" },
-                correct: "B"
-            },
-            {
-                id: 46,
-                category: "Interview",
-                question: "What is the main goal of the Termination phase?",
-                options: { A: "To introduce the nurse to the patient", B: "To summarize information and signal the end of the interview", C: "To perform a head-to-toe assessment", D: "To ask the most difficult questions" },
-                correct: "B"
-            },
-            {
-                id: 47,
-                category: "Interview",
-                question: "Which of the following is an example of a focused question?",
-                options: { A: '"Are you okay?"', B: '"Can you rate your pain on a scale of 0 to 10?"', C: '"Tell me how you\'re feeling."', D: '"Do you have siblings?"' },
-                correct: "B"
-            },
-            {
-                id: 48,
-                category: "Interview",
-                question: "What does paraphrasing during an interview help with?",
-                options: { A: "Completing documentation", B: "Confirming understanding", C: "Diagnosing the illness", D: "Ending the interview" },
-                correct: "B"
-            },
-            {
-                id: 49,
-                category: "Interview",
-                question: "How time constraints act as a barrier to an effective interview?",
-                options: { A: "They make the nurse more efficient", B: "Rushing through questions can affect the depth and accuracy of data", C: "They help build rapport faster", D: "They eliminate the need for open-ended questions" },
-                correct: "B"
-            },
-            {
-                id: 50,
-                category: "Interview",
-                question: 'Which of the following is considered a "Poor Interview Technique"?',
-                options: { A: "Summarizing at the end", B: "Interrupting the patient frequently", C: "Using open-ended questions", D: "Maintaining eye contact" },
-                correct: "B"
-            },
-            {
-                id: 51,
-                category: "Communication according to patient abilities",
-                question: "An example of a closed-ended question is:",
-                options: { A: "How do you feel today?", B: "Can you describe your symptoms?", C: "Do you have allergies to medications?", D: "What happened next?" },
-                correct: "C"
-            },
-            {
-                id: 52,
-                category: "Communication according to patient abilities",
-                question: "To build rapport during the orientation phase, the nurses should first:",
-                options: { A: "Start writing in the chart immediately", B: "Introduce themselves and explain their role", C: "Ask about the patient's bowel habits", D: "Tell the patient their own personal problems" },
-                correct: "B"
-            },
-            {
-                id: 53,
-                category: "Communication according to patient abilities",
-                question: "Gender issues in an interview are categorized as:",
-                options: { A: "Physical barriers", B: "Cultural and social barriers", C: "Time constraints", D: "Psychological barriers" },
-                correct: "B"
-            },
-            {
-                id: 54,
-                category: "Communication according to patient abilities",
-                question: "Emotional barriers during interview include:",
-                options: { A: "Poor lighting", B: "Lack of trust", C: "Gender differences", D: "Religious beliefs" },
-                correct: "B"
-            },
-            {
-                id: 55,
-                category: "Communication according to patient abilities",
-                question: "Health literacy is defined as which of the following?",
-                options: { A: "The ability to read medical textbooks", B: "The capacity to obtain, and understand basic health information", C: "The number of years a patient attended school", D: "The ability to speak more than one language fluently" },
-                correct: "B"
-            },
-            {
-                id: 56,
-                category: "Communication according to patient abilities",
-                question: "Which of the following is a result of low health literacy?",
-                options: { A: "Improved medication adherence", B: "Increased use of preventive services", C: "Increased hospital stay", D: "Better understanding of medical instructions" },
-                correct: "C"
-            },
-            {
-                id: 57,
-                category: "Communication according to patient abilities",
-                question: "When communicating with a patient with low health literacy, a nurse should:",
-                options: { A: "Use complex medical terminology to sound professional", B: "Use Plain Language and avoid jargon", C: "Speak as fast as possible to save time", D: "Provide a large stack of brochures for the patient to read alone" },
-                correct: "B"
-            },
-            {
-                id: 58,
-                category: "Communication according to patient abilities",
-                question: "Which strategy is effective for patients with low health literacy?",
-                options: { A: "Giving all information in one long session", B: "Limiting the number of message at one time", C: "Using only written text without pictures", D: "Avoiding eye contact to reduce patient anxiety" },
-                correct: "B"
-            },
-            {
-                id: 59,
-                category: "Communication according to patient abilities",
-                question: "When using a medical interpreter, the nurse should:",
-                options: { A: "Look and speak directly to the interpreter", B: "Look and speak directly to the patient", C: "Speak in long, complex paragraphs", D: "Use the patient's young child as an interpreter" },
-                correct: "B"
-            },
-            {
-                id: 60,
-                category: "Communication according to patient abilities",
-                question: "When working with a patient who is hard of hearing, the nurse should:",
-                options: { A: "Shout as loudly as possible", B: "Face the person directly so they can see the nurse's mouth", C: "Speak while walking away from the patient", D: "Use only high-pitched tones" },
-                correct: "B"
-            },
-            {
-                id: 61,
-                category: "Communication according to patient abilities",
-                question: "In speech and language deficits, nurses should:",
-                options: { A: "Ignore communication attempts", B: "Praise communication efforts", C: "Only use written instructions", D: "Rush conversations" },
-                correct: "B"
-            },
-            {
-                id: 62,
-                category: "Communication according to patient abilities",
-                question: "For a patient with Alzheimer's disease, a nurse should:",
-                options: { A: "Ask multiple questions at once to gather data quickly", B: "Use a low-pitched, slow speaking voice", C: "Argue with them when they are confused", D: "Avoid making eye contact" },
-                correct: "B"
-            },
-            {
-                id: 63,
-                category: "Communication according to patient abilities",
-                question: "If a patient does not understand a word during an interview, the nurse should:",
-                options: { A: "Repeat the same word louder", B: "Use a different word with the same meaning", C: "Ignore the confusion and move on", D: "Tell the patient to look it up later" },
-                correct: "B"
-            },
-            {
-                id: 64,
-                category: "Communication according to patient abilities",
-                question: "To interact effectively with a medical interpreter, a nurse should:",
-                options: { A: "Speak in short sentences", B: "Use slang and local idioms", C: "Expect a word-for-word translation in all cases", D: "Speak while the interpreter is still talking" },
-                correct: "A"
-            },
-            {
-                id: 65,
-                category: "Communication according to patient abilities",
-                question: "When talking to a person with a hearing aid, you should:",
-                options: { A: "Stand behind them", B: "Reduce background noise as much as possible", C: "Tap on the hearing aid to check if it works", D: "Speak into the hearing aid directly" },
-                correct: "B"
-            },
-            {
-                id: 66,
-                category: "Communication according to patient abilities",
-                question: "For a patient with Alzheimer's, if a situation looks like it may get out of hand, the nurse should use:",
-                options: { A: "Physical restraint immediately", B: "Distraction techniques", C: "Loud commands", D: "Complex reasoning and logic" },
-                correct: "B"
-            },
-            {
-                id: 67,
-                category: "Communication according to patient abilities",
-                question: "When communicating with the deaf person, a nurse should...........:",
-                options: { A: "Only use spoken words", B: "Write messages or use pictograms", C: "Speak faster", D: "Turn away while speaking" },
-                correct: "B"
-            },
-            {
-                id: 68,
-                category: "Communication according to patient abilities",
-                question: "When working with low-literacy patients, instructions should be at what reading level?",
-                options: { A: "College level", B: "High school", C: "Fifth to sixth grade", D: "First grade" },
-                correct: "C"
-            },
-            {
-                id: 69,
-                category: "Communication according to patient abilities",
-                question: "Communication with preschool-aged children should include............:",
-                options: { A: "Complex instructions", B: "Storytelling and play", C: "Formal lectures", D: "Peer-group sessions" },
-                correct: "B"
-            },
-            {
-                id: 70,
-                category: "Communication according to patient abilities",
-                question: "Clients with mental illness benefit from:",
-                options: { A: "Abstract discussions", B: "Complex vocabulary", C: "Concrete sentences", D: "Avoiding games" },
-                correct: "C"
-            },
-            {
-                id: 71,
-                category: "Communication according to patient abilities",
-                question: "When communicating with a person wearing a hearing aid...........:",
-                options: { A: "Remove the hearing aid", B: "Whisper", C: "Check if it's on and properly placed", D: "Use technical signs" },
-                correct: "C"
-            },
-            {
-                id: 72,
-                category: "Communication according to patient abilities",
-                question: "Visually impaired clients should be allowed to...........:",
-                options: { A: "Stand alone", B: "Take your arm for guidance", C: "Use mirrors", D: "Avoid touch" },
-                correct: "B"
-            }
+            { id: 1, category: "Communication process", question: "What is the primary purpose of communication in health education and promotion?", options: { A: "To share administrative data", B: "To promote health improvements through behavior modification", C: "To advertise new medical equipment", D: "To record patient history" }, correct: "B" },
+            { id: 2, category: "Communication process", question: "Which stage of communication is characterized by ensuring the message is seen or heard by the target group?", options: { A: "Stage 1: Reaching the intended audience", B: "Stage 2: Attracting attention", C: "Stage 3: Understanding the message", D: "Stage 4: Promoting change" }, correct: "A" },
+            { id: 3, category: "Communication process", question: "Which of the following is a physical characteristic used to attract attention?", options: { A: "Novelty", B: "Intensity, such as bold lettering", C: "Humor", D: "Felt needs of the audience" }, correct: "B" },
+            { id: 4, category: "Communication process", question: "A communication that uses unusual features or surprising objects to attract attention is using:", options: { A: "Entertainment", B: "Novelty", C: "Intensity", D: "Physical size" }, correct: "B" },
+            { id: 5, category: "Communication process", question: "Misunderstandings in communication most easily occur when:", options: { A: "Primary colors are used", B: "The audience is motivated", C: "Complex language or technical jargon is used", D: "The sender is a health extension worker" }, correct: "C" },
+            { id: 6, category: "Communication process", question: "Which communication approach involves explaining a new idea, including its strengths and weaknesses?", options: { A: "Informing", B: "Educating", C: "Persuading", D: "Entertaining" }, correct: "B" },
+            { id: 7, category: "Communication process", question: "Communication that takes place inside a person, including their thoughts and justifications, is:", options: { A: "Interpersonal communication", B: "Mass communication", C: "Intra-personal communication", D: "Public communication" }, correct: "C" },
+            { id: 8, category: "Communication process", question: "Interpersonal communication is defined as interaction between two or more people who:", options: { A: "Live in the same city", B: "Are together at the same time and place", C: "Read the same newspaper", D: "Have the same job" }, correct: "B" },
+            { id: 9, category: "Communication Barriers", question: "What is defined as the passing of information from sender to receiver with minimum interference?", options: { A: "Organizational structure", B: "Effective communication", C: "Feedback loop", D: "Semantic decoding" }, correct: "B" },
+            { id: 10, category: "Communication Barriers", question: "Which of the following is a primary result of communication barriers in the workplace?", options: { A: "Increased employee satisfaction", B: "Message manipulation and conflict", C: "Improved feedback loops", D: "Clearer organizational goals" }, correct: "B" },
+            { id: 11, category: "Communication Barriers", question: "Using unfamiliar or over-complicated technical terms describes which barrier?", options: { A: "Physical barrier", B: "Jargon", C: "Psychological barrier", D: "Cultural difference" }, correct: "B" },
+            { id: 12, category: "Communication Barriers", question: "If a receiver is distracted by others speaking at the same time, this is a barrier of:", options: { A: "Lack of attention or interest", B: "Perception difference", C: "Physiological disability", D: "Semantic noise" }, correct: "A" },
+            { id: 13, category: "Communication Barriers", question: "Which barrier occurs when two people see things differently and their viewpoints hinder message deciphering?", options: { A: "Physical barrier", B: "Perception difference", C: "Language difference", D: "Emotional barrier" }, correct: "B" },
+            { id: 14, category: "Communication Barriers", question: "A receiver with hearing problems or a speaker with speech disabilities is experiencing:", options: { A: "Cultural differences", B: "Physical disabilities", C: "Prejudices", D: "Semantic barriers" }, correct: "B" },
+            { id: 15, category: "Communication Barriers", question: "Taboo topics like politics, religion, or racism often create:", options: { A: "Organizational barriers", B: "Physical barriers", C: "Emotional barriers", D: "Systemic barriers" }, correct: "C" },
+            { id: 16, category: "Communication Barriers", question: "Social interactions having different norms regarding personal space is an example of:", options: { A: "Physiological barriers", B: "Difference in culture", C: "Semantic barriers", D: "Organizational failure" }, correct: "B" },
+            { id: 17, category: "Communication Barriers", question: "\"Prejudices\" in communication lead to which behavior?", options: { A: "Active listening", B: "Hearing only what one wants to listen to", C: "Increased feedback", D: "Clearer message transmission" }, correct: "B" },
+            { id: 18, category: "Communication Barriers", question: "To overcome barriers, what should a sender do before communicating?", options: { A: "Wait for the receiver to speak first", B: "Ensure ideas are clear and systematized", C: "Use as much jargon as possible", D: "Ignore the objective of the message" }, correct: "B" },
+            { id: 19, category: "Communication Barriers", question: "A sender should frame their message based on:", options: { A: "Their own level of ability", B: "The receiver's needs, understanding, and environment", C: "Only the organizational hierarchy", D: "The most complex language available" }, correct: "B" },
+            { id: 20, category: "Communication Barriers", question: "What is a key benefit of consulting others during communication planning?", options: { A: "It makes the process slower", B: "Involved peoples contribute to the system's success", C: "It eliminates the need for feedback", D: "It focuses only on formal communication" }, correct: "B" },
+            { id: 21, category: "Communication Barriers", question: "Communication is more effective when the message is:", options: { A: "Helpful and valuable to the receiver", B: "Focused only on the sender's interests", C: "Long and over-complicated", D: "Sent without a specific objective" }, correct: "A" },
+            { id: 22, category: "Communication Barriers", question: "What is the primary aim of getting feedback?", options: { A: "To end the conversation", B: "To find if the receiver properly understood the meaning of message", C: "To prove the sender is right", D: "To avoid face-to-face contact" }, correct: "B" },
+            { id: 23, category: "Communication with health care team", question: "Effective healthcare communication is considered as important as:", options: { A: "Financial management", B: "Technical competence", C: "Hospital infrastructure", D: "Staffing ratios" }, correct: "B" },
+            { id: 24, category: "Communication with health care team", question: "Which is the most important tool for health professionals to gather pertinent information and elicit cooperation?", options: { A: "Electronic health records", B: "Diagnostic equipment", C: "Communication", D: "Standard operating procedures" }, correct: "C" },
+            { id: 25, category: "Communication with health care team", question: "The exchange of complex or technical terms among healthcare professionals is defined as:", options: { A: "Clinical practice", B: "Healthcare team communication", C: "Conflict management", D: "Professional networking" }, correct: "B" },
+            { id: 26, category: "Communication with health care team", question: "What is a primary benefit of good communication regarding patient safety?", options: { A: "It increases hospital revenue", B: "It reduces medical errors", C: "It shortens nursing shifts", D: "It replaces the need for documentation" }, correct: "B" },
+            { id: 27, category: "Communication with health care team", question: "Which of the following is a benefit of communication for the healthcare staff?", options: { A: "Increased workload", B: "Higher rates of burnout", C: "Increased job satisfaction", D: "Less accountability" }, correct: "C" },
+            { id: 28, category: "Communication with health care team", question: "Which part of the communication model describes the way through which the message is conveyed?", options: { A: "Receiver", B: "Channel", C: "Feedback", D: "Decoding" }, correct: "B" },
+            { id: 29, category: "Communication with health care team", question: "Formal healthcare messages include:", options: { A: "Face-to-face greetings", B: "Emails to friends", C: "Hospital discharge summaries", D: "Informal phone chats" }, correct: "C" },
+            { id: 30, category: "Communication with health care team", question: "A major concern requiring strong security protocols in healthcare communication is:", options: { A: "Staff scheduling", B: "Patient privacy", C: "Financial transactions", D: "Equipment maintenance" }, correct: "B" },
+            { id: 31, category: "Communication with health care team", question: "Effective healthcare teams prioritize which type of communication to reduce errors?", options: { A: "Indirect communication", B: "Face-to-face communication", C: "Informal rumors", D: "One-way memos" }, correct: "B" },
+            { id: 32, category: "Communication with health care team", question: "Which of the following is a key element of an effective handover?", options: { A: "Making it as fast as possible", B: "Avoiding eye contact to stay focused", C: "Adequate time without interruptions", D: "Using highly complex jargon" }, correct: "C" },
+            { id: 33, category: "Communication with health care team", question: "Handover of a specific patient should include a summary of stay, including:", options: { A: "The patient's home address", B: "Diagnosis and treatment", C: "The hospital's financial policy", D: "The nurse's personal opinions on the family" }, correct: "B" },
+            { id: 34, category: "Communication with health care team", question: "Poor communication during handover is specifically associated with:", options: { A: "Increased hospital parking fees", B: "Increased patient mortality and morbidity", C: "Improved staff attendance", D: "Better equipment maintenance" }, correct: "B" },
+            { id: 35, category: "Communication with health care team", question: "A communication plan for ongoing treatment during handover should include:", options: { A: "Only the patient's diet", B: "Drugs and therapies", C: "The staff's vacation schedule", D: "Previous hospital history from 10 years ago" }, correct: "B" },
+            { id: 36, category: "Communication with health care team", question: "Which of the following is a way to improve communication in a healthcare organization?", options: { A: "Discouraging mobile collaboration", B: "Making communication part of the organization's culture", C: "Relying solely on paper notes", D: "Reducing face-to-face interactions" }, correct: "B" },
+            { id: 37, category: "Communication with health care team", question: "Streamlining communication channels helps to:", options: { A: "Create more confusion", B: "Improve communication in healthcare", C: "Increase the number of meetings", D: "Ensure only doctors can speak" }, correct: "B" },
+            { id: 38, category: "Communication with health care team", question: "Non-verbal communication includes:", options: { A: "Written reports", B: "Facial expressions, eye contact, and posture", C: "Phone conversations", D: "Text messages" }, correct: "B" },
+            { id: 39, category: "Interview", question: "A nursing interview is defined as:", options: { A: "A casual conversation to pass the time", B: "An organized conversation to obtain client history", C: "A physical examination of the patient's body", D: "A social interaction between the nurse and the family" }, correct: "B" },
+            { id: 40, category: "Interview", question: "The primary objective of an interview is to collect:", options: { A: "Objective data through physical touch", B: "Subjective data to supplement objective assessments", C: "Financial information for hospital billing", D: "Only the patient's legal documents" }, correct: "B" },
+            { id: 41, category: "Interview", question: "Which of the following is an objective of the nursing interview?", options: { A: "To prescribe medications", B: "To establish trust and rapport with the patient", C: "To replace the need for physical assessment", D: "To diagnose the patient without a physician" }, correct: "B" },
+            { id: 42, category: "Interview", question: "Which type of question is best for gathering detailed responses and encouraging the patient to tell their story?", options: { A: "Closed-ended", B: "Open-ended", C: "Leading questions", D: "Focused questions" }, correct: "B" },
+            { id: 43, category: "Interview", question: "Closed-ended questions are most useful when the nurse needs:", options: { A: "Detailed emotional context", B: "Specific facts or \"yes/no\" answers", C: "To build long-term rapport", D: "To understand the patient's perspective" }, correct: "B" },
+            { id: 44, category: "Interview", question: "Which phase of the interview involves explains the purpose of interview and build a rapport with the patient?", options: { A: "Working phase", B: "Orientation phase", C: "Termination phase", D: "Follow-up phase" }, correct: "B" },
+            { id: 45, category: "Interview", question: "In which phase the nurse obtain data for developing a nursing care plan of the patient?", options: { A: "Termination phase", B: "Working phase", C: "Orientation phase", D: "Preparatory phase" }, correct: "B" },
+            { id: 46, category: "Interview", question: "What is the main goal of the Termination phase?", options: { A: "To introduce the nurse to the patient", B: "To summarize information and signal the end of the interview", C: "To perform a head-to-toe assessment", D: "To ask the most difficult questions" }, correct: "B" },
+            { id: 47, category: "Interview", question: "Which of the following is an example of a focused question?", options: { A: "\"Are you okay?\"", B: "\"Can you rate your pain on a scale of 0 to 10?\"", C: "\"Tell me how you're feeling.\"", D: "\"Do you have siblings?\"" }, correct: "B" },
+            { id: 48, category: "Interview", question: "What does paraphrasing during an interview help with?", options: { A: "Completing documentation", B: "Confirming understanding", C: "Diagnosing the illness", D: "Ending the interview" }, correct: "B" },
+            { id: 49, category: "Interview", question: "How time constraints act as a barrier to an effective interview?", options: { A: "They make the nurse more efficient", B: "Rushing through questions can affect the depth and accuracy of data", C: "They help build rapport faster", D: "They eliminate the need for open-ended questions" }, correct: "B" },
+            { id: 50, category: "Interview", question: "Which of the following is considered a \"Poor Interview Technique\"?", options: { A: "Summarizing at the end", B: "Interrupting the patient frequently", C: "Using open-ended questions", D: "Maintaining eye contact" }, correct: "B" },
+            { id: 51, category: "Communication according to patient abilities", question: "An example of a closed-ended question is:", options: { A: "How do you feel today?", B: "Can you describe your symptoms?", C: "Do you have allergies to medications?", D: "What happened next?" }, correct: "C" },
+            { id: 52, category: "Communication according to patient abilities", question: "To build rapport during the orientation phase, the nurses should first:", options: { A: "Start writing in the chart immediately", B: "Introduce themselves and explain their role", C: "Ask about the patient's bowel habits", D: "Tell the patient their own personal problems" }, correct: "B" },
+            { id: 53, category: "Communication according to patient abilities", question: "Gender issues in an interview are categorized as:", options: { A: "Physical barriers", B: "Cultural and social barriers", C: "Time constraints", D: "Psychological barriers" }, correct: "B" },
+            { id: 54, category: "Communication according to patient abilities", question: "Emotional barriers during interview include:", options: { A: "Poor lighting", B: "Lack of trust", C: "Gender differences", D: "Religious beliefs" }, correct: "B" },
+            { id: 55, category: "Communication according to patient abilities", question: "Health literacy is defined as which of the following?", options: { A: "The ability to read medical textbooks", B: "The capacity to obtain, and understand basic health information", C: "The number of years a patient attended school", D: "The ability to speak more than one language fluently" }, correct: "B" },
+            { id: 56, category: "Communication according to patient abilities", question: "Which of the following is a result of low health literacy?", options: { A: "Improved medication adherence", B: "Increased use of preventive services", C: "Increased hospital stay", D: "Better understanding of medical instructions" }, correct: "C" },
+            { id: 57, category: "Communication according to patient abilities", question: "When communicating with a patient with low health literacy, a nurse should:", options: { A: "Use complex medical terminology to sound professional", B: "Use Plain Language and avoid jargon", C: "Speak as fast as possible to save time", D: "Provide a large stack of brochures for the patient to read alone" }, correct: "B" },
+            { id: 58, category: "Communication according to patient abilities", question: "Which strategy is effective for patients with low health literacy?", options: { A: "Giving all information in one long session", B: "Limiting the number of message at one time", C: "Using only written text without pictures", D: "Avoiding eye contact to reduce patient anxiety" }, correct: "B" },
+            { id: 59, category: "Communication according to patient abilities", question: "When using a medical interpreter, the nurse should:", options: { A: "Look and speak directly to the interpreter", B: "Look and speak directly to the patient", C: "Speak in long, complex paragraphs", D: "Use the patient's young child as an interpreter" }, correct: "B" },
+            { id: 60, category: "Communication according to patient abilities", question: "When working with a patient who is hard of hearing, the nurse should:", options: { A: "Shout as loudly as possible", B: "Face the person directly so they can see the nurse's mouth", C: "Speak while walking away from the patient", D: "Use only high-pitched tones" }, correct: "B" },
+            { id: 61, category: "Communication according to patient abilities", question: "In speech and language deficits, nurses should:", options: { A: "Ignore communication attempts", B: "Praise communication efforts", C: "Only use written instructions", D: "Rush conversations" }, correct: "B" },
+            { id: 62, category: "Communication according to patient abilities", question: "For a patient with Alzheimer's disease, a nurse should:", options: { A: "Ask multiple questions at once to gather data quickly", B: "Use a low-pitched, slow speaking voice", C: "Argue with them when they are confused", D: "Avoid making eye contact" }, correct: "B" },
+            { id: 63, category: "Communication according to patient abilities", question: "If a patient does not understand a word during an interview, the nurse should:", options: { A: "Repeat the same word louder", B: "Use a different word with the same meaning", C: "Ignore the confusion and move on", D: "Tell the patient to look it up later" }, correct: "B" },
+            { id: 64, category: "Communication according to patient abilities", question: "To interact effectively with a medical interpreter, a nurse should:", options: { A: "Speak in short sentences", B: "Use slang and local idioms", C: "Expect a word-for-word translation in all cases", D: "Speak while the interpreter is still talking" }, correct: "A" },
+            { id: 65, category: "Communication according to patient abilities", question: "When talking to a person with a hearing aid, you should:", options: { A: "Stand behind them", B: "Reduce background noise as much as possible", C: "Tap on the hearing aid to check if it works", D: "Speak into the hearing aid directly" }, correct: "B" },
+            { id: 66, category: "Communication according to patient abilities", question: "For a patient with Alzheimer's, if a situation looks like it may get out of hand, the nurse should use:", options: { A: "Physical restraint immediately", B: "Distraction techniques", C: "Loud commands", D: "Complex reasoning and logic" }, correct: "B" },
+            { id: 67, category: "Communication according to patient abilities", question: "When communicating with the deaf person, a nurse should...........:", options: { A: "Only use spoken words", B: "Write messages or use pictograms", C: "Speak faster", D: "Turn away while speaking" }, correct: "B" },
+            { id: 68, category: "Communication according to patient abilities", question: "When working with low-literacy patients, instructions should be at what reading level?", options: { A: "College level", B: "High school", C: "Fifth to sixth grade", D: "First grade" }, correct: "C" },
+            { id: 69, category: "Communication according to patient abilities", question: "Communication with preschool-aged children should include............:", options: { A: "Complex instructions", B: "Storytelling and play", C: "Formal lectures", D: "Peer-group sessions" }, correct: "B" },
+            { id: 70, category: "Communication according to patient abilities", question: "Clients with mental illness benefit from:", options: { A: "Abstract discussions", B: "Complex vocabulary", C: "Concrete sentences", D: "Avoiding games" }, correct: "C" },
+            { id: 71, category: "Communication according to patient abilities", question: "When communicating with a person wearing a hearing aid...........:", options: { A: "Remove the hearing aid", B: "Whisper", C: "Check if it's on and properly placed", D: "Use technical signs" }, correct: "C" },
+            { id: 72, category: "Communication according to patient abilities", question: "Visually impaired clients should be allowed to...........:", options: { A: "Stand alone", B: "Take your arm for guidance", C: "Use mirrors", D: "Avoid touch" }, correct: "B" }
         ];
 
-        let currentMode = 'bank';
-        let bankCategory = 'all';
-        let bankSearch = '';
-        
-        let examAnswers = {};
-        let examIndex = 0;
-        let examTimer = null;
-        let examSecondsLeft = 30 * 60; // 30 mins
+        let currentMode = 'bank', bankCategory = 'all', bankSearch = '', examAnswers = {}, examIndex = 0, examTimer = null, examSecondsLeft = 30 * 60;
 
-        window.addEventListener('DOMContentLoaded', () => {
-            renderBank();
-        });
+        window.addEventListener('DOMContentLoaded', () => { renderBank(); });
 
         function switchMode(mode) {
             if (currentMode === mode) return;
-
             if (currentMode === 'exam' && examTimer && Object.keys(examAnswers).length > 0) {
                 if (!confirm("هل تريد مغادرة الامتحان الحالي؟ ستفقد جميع إجاباتك غير المحفوظة.")) return;
             }
-
             document.getElementById('bank-workspace').classList.remove('active');
             document.getElementById('exam-workspace').classList.remove('active');
             document.getElementById('results-workspace').classList.remove('active');
             document.getElementById('mode-bank-btn').classList.remove('active');
             document.getElementById('mode-exam-btn').classList.remove('active');
-
-            clearInterval(examTimer);
-            examTimer = null;
-            currentMode = mode;
-
+            clearInterval(examTimer); examTimer = null; currentMode = mode;
             if (mode === 'bank') {
                 document.getElementById('mode-bank-btn').classList.add('active');
                 document.getElementById('bank-workspace').classList.add('active');
                 renderBank();
             } else {
-                document.getElementById('mode-exam-btn').classList.add('acti
-                  document.getElementById('exam-workspace').classList.add('active');
+                document.getElementById('mode-exam-btn').classList.add('active');
+                document.getElementById('exam-workspace').classList.add('active');
                 startExam();
             }
         }
 
-        // ================= BANK MODE =================
         function filterBankCategory(cat, btn) {
             bankCategory = cat;
             document.querySelectorAll('#bank-tabs .tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderBank();
+            btn.classList.add('active'); renderBank();
         }
 
         function filterBankQuestions() {
-            bankSearch = document.getElementById('bank-search').value.toLowerCase();
-            renderBank();
+            bankSearch = document.getElementById('bank-search').value.toLowerCase(); renderBank();
         }
 
         function renderBank() {
-            const container = document.getElementById('bank-questions-container');
-            container.innerHTML = '';
-
+            const container = document.getElementById('bank-questions-container'); container.innerHTML = '';
             const filtered = questions.filter(q => {
-                const matchCat = (bankCategory === 'all' || q.category === bankCategory);
-                const matchTxt = q.question.toLowerCase().includes(bankSearch) || 
-                                  Object.values(q.options).some(o => o.toLowerCase().includes(bankSearch));
-                return matchCat && matchTxt;
+                return (bankCategory === 'all' || q.category === bankCategory) && 
+                       (q.question.toLowerCase().includes(bankSearch) || Object.values(q.options).some(o => o.toLowerCase().includes(bankSearch)));
             });
-
             if (filtered.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted);">لا توجد أسئلة تطابق البحث الحالي.</div>`;
-                return;
+                container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted);">لا توجد أسئلة تطابق البحث الحالي.</div>`; return;
             }
-
             filtered.forEach(q => {
-                const card = document.createElement('div');
-                card.className = 'question-card';
-                
+                const card = document.createElement('div'); card.className = 'question-card';
                 let optionsHtml = '';
                 Object.keys(q.options).forEach(l => {
-                    const isCorrect = (l === q.correct);
-                    optionsHtml += `
-                        <div class="option-item ${isCorrect ? 'correct-reveal' : ''}">
-                            <span class="option-letter">${l}</span>
-                            <span>${q.options[l]}</span>
-                        </div>
-                    `;
+                    optionsHtml += `<div class="option-item ${l === q.correct ? 'correct-reveal' : ''}"><span class="option-letter">${l}</span><span>${q.options[l]}</span></div>`;
                 });
-
-                card.innerHTML = `
-                    <div class="question-meta">
-                        <span><strong>السؤال رقم ${q.id}</strong></span>
-                        <span class="category-badge">${q.category}</span>
-                    </div>
-                    <div class="question-text">${q.id}. ${q.question}</div>
-                    <div class="options-list">${optionsHtml}</div>
-                `;
+                card.innerHTML = `<div class="question-meta"><span><strong>السؤال رقم ${q.id}</strong></span><span class="category-badge">${q.category}</span></div><div class="question-text">${q.id}. ${q.question}</div><div class="options-list">${optionsHtml}</div>`;
                 container.appendChild(card);
             });
         }
 
-        // ================= EXAM MODE =================
         function startExam() {
-            examAnswers = {};
-            examIndex = 0;
-            examSecondsLeft = 30 * 60;
-            
-            buildExamNav();
-            showExamQuestion();
-            
+            examAnswers = {}; examIndex = 0; examSecondsLeft = 30 * 60; buildExamNav(); showExamQuestion();
             if (examTimer) clearInterval(examTimer);
             examTimer = setInterval(() => {
-                if (examSecondsLeft <= 0) {
-                    clearInterval(examTimer);
-                    alert("انتهى وقت الامتحان (30 دقيقة)! سيتم احتساب الدرجة تلقائياً.");
-                    endExam();
-                } else {
+                if (examSecondsLeft <= 0) { clearInterval(examTimer); alert("انتهى وقت الامتحان!"); endExam(); }
+                else {
                     examSecondsLeft--;
-                    const m = Math.floor(examSecondsLeft / 60).toString().padStart(2, '0');
-                    const s = (examSecondsLeft % 60).toString().padStart(2, '0');
-                    document.getElementById('exam-timer').textContent = `${m}:${s}`;
+                    document.getElementById('exam-timer').textContent = `${Math.floor(examSecondsLeft / 60).toString().padStart(2, '0')}:${(examSecondsLeft % 60).toString().padStart(2, '0')}`;
                 }
             }, 1000);
         }
 
         function buildExamNav() {
-            const grid = document.getElementById('exam-nav-grid');
-            grid.innerHTML = '';
+            const grid = document.getElementById('exam-nav-grid'); grid.innerHTML = '';
             questions.forEach((q, idx) => {
-                const box = document.createElement('div');
-                box.className = 'nav-box';
-                box.id = `nav-box-${idx}`;
-                box.textContent = q.id;
-                box.onclick = () => {
-                    examIndex = idx;
-                    showExamQuestion();
-                };
-                grid.appendChild(box);
+                const box = document.createElement('div'); box.className = 'nav-box'; box.id = `nav-box-${idx}`; box.textContent = q.id;
+                box.onclick = () => { examIndex = idx; showExamQuestion(); }; grid.appendChild(box);
             });
         }
 
         function showExamQuestion() {
-            const viewport = document.getElementById('exam-question-viewport');
-            viewport.innerHTML = '';
-            
-            const q = questions[examIndex];
-            const chosen = examAnswers[q.id];
-            
+            const viewport = document.getElementById('exam-question-viewport'); viewport.innerHTML = '';
+            const q = questions[examIndex]; const chosen = examAnswers[q.id];
             let optionsHtml = '';
             Object.keys(q.options).forEach(l => {
-                optionsHtml += `
-                    <div class="option-item ${chosen === l ? 'selected' : ''}" onclick="selectExamOption('${q.id}', '${l}')">
-                        <span class="option-letter">${l}</span>
-                        <span>${q.options[l]}</span>
-                    </div>
-                `;
+                optionsHtml += `<div class="option-item ${chosen === l ? 'selected' : ''}" onclick="selectExamOption('${q.id}', '${l}')"><span class="option-letter">${l}</span><span>${q.options[l]}</span></div>`;
             });
-
-            viewport.innerHTML = `
-                <div class="question-card">
-                    <div class="question-meta">
-                        <span><strong>السؤال رقم ${examIndex + 1} من 72</strong></span>
-                        <span class="category-badge">${q.category}</span>
-                    </div>
-                    <div class="question-text">${q.id}. ${q.question}</div>
-                    <div class="options-list">${optionsHtml}</div>
-                </div>
-            `;
-
+            viewport.innerHTML = `<div class="question-card"><div class="question-meta"><span><strong>السؤال رقم ${examIndex + 1} من 72</strong></span><span class="category-badge">${q.category}</span></div><div class="question-text">${q.id}. ${q.question}</div><div class="options-list">${optionsHtml}</div></div>`;
             document.getElementById('exam-progress-text').textContent = `السؤال ${examIndex + 1} من 72`;
             document.getElementById('exam-prev-btn').disabled = (examIndex === 0);
             document.getElementById('exam-next-btn').disabled = (examIndex === questions.length - 1);
-
-            document.querySelectorAll('#exam-nav-grid .nav-box').forEach((b, i) => {
-                b.classList.remove('current');
-                if (i === examIndex) b.classList.add('current');
-            });
+            document.querySelectorAll('#exam-nav-grid .nav-box').forEach((b, i) => { b.classList.remove('current'); if (i === examIndex) b.classList.add('current'); });
         }
 
-        function selectExamOption(qId, letter) {
-            examAnswers[qId] = letter;
-            document.getElementById(`nav-box-${examIndex}`).classList.add('answered');
-            showExamQuestion();
-        }
-
-        function navigateExam(dir) {
-            examIndex += dir;
-            showExamQuestion();
-        }
-
-        function confirmEndExam() {
-            const totalAnswered = Object.keys(examAnswers).length;
-            if (totalAnswered < 72) {
-                if (!confirm(`لقد قمت بحل ${totalAnswered} سؤالاً فقط من أصل 72. هل تريد بالتأكيد إنهاء الامتحان وحساب الدرجة؟`)) return;
-            } else {
-                if (!confirm("هل أنت متأكد من تسليم الإجابات وإنهاء الامتحان؟")) return;
-            }
-            endExam();
-        }
+        function selectExamOption(qId, letter) { examAnswers[qId] = letter; document.getElementById(`nav-box-${examIndex}`).classList.add('answered'); showExamQuestion(); }
+        function navigateExam(dir) { examIndex += dir; showExamQuestion(); }
+        function confirmEndExam() { if (confirm("هل أنت متأكد من تسليم الإجابات وإنهاء الامتحان؟")) endExam(); }
 
         function endExam() {
-            clearInterval(examTimer);
-            document.getElementById('exam-workspace').classList.remove('active');
-            document.getElementById('results-workspace').classList.add('active');
-            
-            calculateResults();
-        }
-
-        // ================= CALC RESULTS & REVIEW =================
-        function calculateResults() {
+            clearInterval(examTimer); document.getElementById('exam-workspace').classList.remove('active'); document.getElementById('results-workspace').classList.add('active');
             let correct = 0, wrong = 0, unanswered = 0;
-            const reviewContainer = document.getElementById('exam-review-container');
-            reviewContainer.innerHTML = '';
-
+            const revContainer = document.getElementById('exam-review-container'); revContainer.innerHTML = '';
             questions.forEach(q => {
-                const userAns = examAnswers[q.id];
-                const isCorrect = (userAns === q.correct);
-                
-                if (!userAns) unanswered++;
-                else if (isCorrect) correct++;
-                else wrong++;
-
-                // Build detailed card element
-                const card = document.createElement('div');
-                card.className = 'question-card';
+                const userAns = examAnswers[q.id]; const isCorrect = (userAns === q.correct);
+                if (!userAns) unanswered++; else if (isCorrect) correct++; else wrong++;
+                const card = document.createElement('div'); card.className = 'question-card';
                 card.style.borderRight = isCorrect ? '5px solid var(--success)' : (!userAns ? '5px solid var(--warning)' : '5px solid var(--error)');
-                
                 let optionsHtml = '';
                 Object.keys(q.options).forEach(l => {
-                    let rev = '';
-                    if (l === q.correct) rev = 'correct-reveal';
-                    else if (userAns === l && !isCorrect) rev = 'wrong-reveal';
-
-                    optionsHtml += `
-                        <div class="option-item ${rev}">
-                            <span class="option-letter">${l}</span>
-                            <span>${q.options[l]}</span>
-                        </div>
-                    `;
+                    let rev = l === q.correct ? 'correct-reveal' : (userAns === l ? 'wrong-reveal' : '');
+                    optionsHtml += `<div class="option-item ${rev}"><span class="option-letter">${l}</span><span>${q.options[l]}</span></div>`;
                 });
-
-                let statusText = isCorrect ? '✅ صحيحة' : (!userAns ? '⚠️ لم تُحل' : `❌ خاطئة (إجابتك: ${userAns})`);
-
-                card.innerHTML = `
-                    <div class="question-meta">
-                        <span><strong>السؤال رقم ${q.id} — <span style="color:${isCorrect?'var(--success)':(!userAns?'var(--warning)':'var(--error)')}">${statusText}</span></strong></span>
-                        <span class="category-badge">${q.category}</span>
-                    </div>
-                    <div class="question-text">${q.id}. ${q.question}</div>
-                    <div class="options-list">${optionsHtml}</div>
-                `;
-                reviewContainer.appendChild(card);
+                card.innerHTML = `<div class="question-meta"><span><strong>السؤال رقم ${q.id} — ${isCorrect?'✅ صحيحة':(!userAns?'⚠️ لم تُحل':'❌ خاطئة')}</strong></span><span class="category-badge">${q.category}</span></div><div class="question-text">${q.id}. ${q.question}</div><div class="options-list">${optionsHtml}</div>`;
+                revContainer.appendChild(card);
             });
-
             const percent = Math.round((correct / questions.length) * 100);
             document.getElementById('result-score').innerHTML = `${percent}% <span>الدرجة الكلية</span>`;
-            document.getElementById('stat-correct').textContent = correct;
-            document.getElementById('stat-wrong').textContent = wrong;
-            document.getElementById('stat-unanswered').textContent = unanswered;
-
-            const greet = document.getElementById('result-greeting');
-            if (percent >= 85) greet.textContent = "🏆 أداء ممتاز ومشرف جداً! ممتاز مرتفع.";
-            else if (percent >= 60) greet.textContent = "👍 ناجح، أداء جيد ويمكنك مراجعة الأخطاء لتضمن الامتياز الكلي.";
-            else greet.textContent = "📚 راسب، تحتاج لمراجعة الأسئلة الخاطئة وإعادة محاولة الاختبار مرة أخرى.";
-            
+            document.getElementById('stat-correct').textContent = correct; document.getElementById('stat-wrong').textContent = wrong; document.getElementById('stat-unanswered').textContent = unanswered;
+            document.getElementById('result-greeting').textContent = percent >= 85 ? "🏆 أداء ممتاز ومشرف جداً!" : (percent >= 60 ? "👍 ناجح، أداء جيد ويمكنك تحسينه." : "📚 تحتاج لمراجعة الأسئلة وإعادة المحاولة.");
             window.scrollTo({ top: document.getElementById('results-workspace').offsetTop - 20, behavior: 'smooth' });
         }
-
-        function restartToBank() {
-            switchMode('bank');
-        }
+        function restartToBank() { switchMode('bank'); }
     </script>
 </body>
-</html>                                                     
+                                                               </html>
